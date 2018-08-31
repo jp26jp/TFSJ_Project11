@@ -1,14 +1,12 @@
-"use strict"
+const mongoose = require("mongoose")
+      // User     = require("./user")
 
-const mongoose = require("mongoose"),
-      Schema   = mongoose.Schema,
-      User     = require("./User")
-
-const ReviewSchema = new Schema({
-                                    user: {type: User},
+const ReviewSchema = new mongoose.Schema({
+                                    // user: {type: User},
                                     postedOn: {type: Date, default: Date.now},
                                     rating : {type: Number, required: true, min: 1, max: 5},
                                     review : {type: String}
                               })
 
-module.exports.Review = ReviewSchema
+const Review = mongoose.model("Review", ReviewSchema)
+module.exports = Review

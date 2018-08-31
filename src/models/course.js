@@ -1,11 +1,8 @@
-"use strict"
+const mongoose = require("mongoose")
+      // User     = require("./user")
 
-const mongoose = require("mongoose"),
-      Schema   = mongoose.Schema,
-      User     = require("./User")
-
-const CourseSchema = new Schema({
-                                    user           : {type: User},
+const CourseSchema = new mongoose.Schema({
+                                    // user           : {type: User},
                                     title          : {type: String, required: true},
                                     description    : {type: String, required: true},
                                     estimatedTime  : {type: String},
@@ -14,4 +11,5 @@ const CourseSchema = new Schema({
                                     reviews        : {type: String},
                                 })
 
-module.exports.Course = CourseSchema
+const Course = mongoose.model("Course", CourseSchema)
+module.exports = Course

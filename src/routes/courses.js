@@ -1,12 +1,10 @@
-"use strict"
-
 const express = require("express"),
       router  = express.Router(),
-      Reviews = require("../models/").Review
+      Course = require("../models/course")
 
 // - GET /api/courses 200 - Returns the Course "_id" and "title" properties
 router.get("/courses", (req, res, next) => {
-
+    console.log("Hello")
 })
 
 // - POST /api/courses 201 - Creates a course, sets the Location header, and returns no content
@@ -29,3 +27,4 @@ router.post("/courses/:courseId/reviews", (req, res, next) => {
 
 })
 
+module.exports = router

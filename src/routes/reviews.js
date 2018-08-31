@@ -1,6 +1,5 @@
-"use strict"
-
 const express = require("express"),
       router  = express.Router(),
-      Reviews = require("../models/").Review
+      Reviews = require("../models/review")
 
+module.exports = router

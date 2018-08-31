@@ -61,7 +61,7 @@ mongoimport --db course-api --collection reviews --type=json --jsonArray --file 
 - [x] User
     - [x] _id (ObjectId, auto-generated)
     - [x] fullName (String, required)
-    - [ ] emailAddress (String, required, must be unique and in correct format)
+    - [x] emailAddress (String, required, must be unique and in correct format)
     - [x] password (String, required)
 - [x] Course
     - [x] _id (ObjectId, auto-generated)
