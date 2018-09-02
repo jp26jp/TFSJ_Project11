@@ -3,18 +3,14 @@ const express    = require("express"),
       logger     = require("morgan"),
       mongoose   = require("mongoose"),
       jsonParser = require("body-parser").json,
-      session    = require("express-session")
+      session    = require("express-session"),
+      MongoStore = require("connect-mongo")(session)
 
 const courses = require("./routes/courses"),
       reviews = require("./routes/reviews"),
       users   = require("./routes/users")
 
 app.use(jsonParser())
-app.use(session({
-                    secret           : "eminem",
-                    resave           : true,
-                    saveUninitialized: false
-                }))
 
 // set our port
 app.set("port", process.env.PORT || 5000)
@@ -25,6 +21,21 @@ app.use(logger("dev"))
 // connnect to mongoose
 mongoose.connect("mongodb://localhost:27017/qa", {useNewUrlParser: true})
 const db = mongoose.connection
+
+// user sessions for tracking login
+app.use(session({
+                    secret           : "eminem",
+                    resave           : true,
+                    saveUninitialized: false,
+                    store            : new MongoStore({
+                                                          mongooseConnection: db
+                                                      })
+                }))
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.session.userId
+    next()
+})
 
 // log connection status
 db.on("error", error => console.error("connection error:", error))
@@ -40,7 +51,7 @@ app.get("/", (req, res) => {
 })
 
 // uncomment this route in order to test the global error handler
-app.get("/error", function (req, res) {
+app.get("/error", (req, res) => {
     throw new Error("Test error")
 })
 
