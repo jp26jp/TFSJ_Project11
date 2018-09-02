@@ -1,6 +1,5 @@
 const mongoose        = require("mongoose"),
       bcrypt          = require("bcrypt")
-      // uniqueValidator = require("mongoose-unique-validator")
 
 const UserSchema = new mongoose.Schema({
                                            fullName    : {type: String},
@@ -8,7 +7,6 @@ const UserSchema = new mongoose.Schema({
                                            password    : {type: String, required: true}
                                        })
     
-// UserSchema.plugin(uniqueValidator, {message: 'Error, expected emailAddress to be unique.'})
 
 UserSchema.statics.authenticate = (emailAddress, password, callback) => {
     User.findOne({emailAddress: emailAddress})

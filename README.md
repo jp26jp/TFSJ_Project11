@@ -85,8 +85,8 @@ Mongoose validation gives you a rich set of tools to validate user data. See htt
 ### Create the user routes
 Set up the following routes (listed in the format HTTP VERB Route HTTP Status Code):
 Users
-- [ ] GET /api/users 200 - Returns the currently authenticated user
-- [ ] POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
+- [x] GET /api/users 200 - Returns the currently authenticated user
+- [x] POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
 
 Courses
 - [ ] GET /api/courses 200 - Returns the Course "_id" and "title" properties
@@ -97,8 +97,8 @@ Courses
 - [ ] POST /api/courses/:courseId/reviews 201 - Creates a review for the specified course ID, sets the Location header to the related course, and returns no content
 
 ### Update any POST and PUT routes to return Mongoose validation errors.
-- [ ] Use the next function in each route to pass any Mongoose validation errors to Express’s global error handler
-- [ ] Send the Mongoose validation error with a 400 status code to the user
+- [x] Use the next function in each route to pass any Mongoose validation errors to Express’s global error handler
+- [x] Send the Mongoose validation error with a 400 status code to the user
 
 ### Update the User model to store the user's password as a hashed value.
 For security reasons, we don't want to store the password property in the database as clear text. 
