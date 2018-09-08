@@ -7,7 +7,6 @@ const express    = require("express"),
       MongoStore = require("connect-mongo")(session)
 
 const courses = require("./routes/courses"),
-      reviews = require("./routes/reviews"),
       users   = require("./routes/users")
 
 app.use(jsonParser())
@@ -19,7 +18,7 @@ app.set("port", process.env.PORT || 5000)
 app.use(logger("dev"))
 
 // connnect to mongoose
-mongoose.connect("mongodb://localhost:27017/qa", {useNewUrlParser: true})
+mongoose.connect("mongodb://localhost:27017/course-api", {useNewUrlParser: true})
 const db = mongoose.connection
 
 // user sessions for tracking login
@@ -41,8 +40,7 @@ app.use((req, res, next) => {
 db.on("error", error => console.error("connection error:", error))
 db.once("open", () => console.log("db connection successful"))
 
-app.use("/api", courses)
-app.use("/api", reviews)
+app.use("/api/courses", courses)
 app.use("/api", users)
 
 // send a friendly greeting for the root route

@@ -1,12 +1,11 @@
-const mongoose        = require("mongoose"),
-      bcrypt          = require("bcrypt")
+const mongoose = require("mongoose"),
+      bcrypt   = require("bcrypt")
 
 const UserSchema = new mongoose.Schema({
                                            fullName    : {type: String},
                                            emailAddress: {type: String, required: true, unique: true},
                                            password    : {type: String, required: true}
                                        })
-    
 
 UserSchema.statics.authenticate = (emailAddress, password, callback) => {
     User.findOne({emailAddress: emailAddress})
@@ -36,9 +35,7 @@ UserSchema.statics.authenticate = (emailAddress, password, callback) => {
 UserSchema.pre("save", function (next) {
     const user = this
     bcrypt.hash(user.password, 10, (error, hash) => {
-        if (error) {
-            return next(error)
-        }
+        if (error) next(error)
         user.password = hash
         next()
     })

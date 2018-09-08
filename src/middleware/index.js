@@ -17,7 +17,8 @@ function requiresLogin(req, res, next) {
             }
             else {
                 req.session.userId = user._id
-                res.status(201).location("/").send()
+                res.status(201).location("/")
+                next()
             }
         })
     }
